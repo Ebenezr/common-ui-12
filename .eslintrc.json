@@ -1,3 +1,93 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true
+  },
+  "extends": ["plugin:react/recommended", "airbnb", "next/core-web-vitals", "plugin:import/errors", "plugin:import/warnings"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module",
+    "allowImportExportEverywhere": false,
+    "codeFrame": false
+  },
+  "plugins": ["react", "prettier", "@babel"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+        "moduleDirectory": ["node_modules", "src/"],
+        "extensions": [".js", ".jsx"]
+      }
+    }
+  },
+  "parser": "@babel/eslint-parser",
+  "rules": {
+    "@next/next/no-html-link-for-pages": ["error", "src/"],
+    "react/jsx-no-useless-fragment": "off",
+    "react/jsx-wrap-multilines": [
+      "error",
+      {
+        "declaration": "parens-new-line",
+        "assignment": "parens-new-line",
+        "return": "parens-new-line",
+        "arrow": "parens-new-line",
+        "condition": "parens-new-line",
+        "logical": "ignore",
+        "prop": "ignore"
+      }
+    ],
+    "no-unused-vars": "error",
+    "object-curly-newline": "off",
+    "no-console": "error",
+    "no-param-reassign": "warn",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 140,
+        "ignoreRegExpLiterals": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreUrls": true
+      }
+    ],
+    "linebreak-style": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/require-default-props": 0,
+    "react/jsx-props-no-spreading": 0,
+    "no-underscore-dangle": 0,
+    "react/forbid-prop-types": 0,
+    "react/static-property-placement": 0,
+    "import/imports-first": ["error", "absolute-first"],
+    "import/newline-after-import": "error",
+    "react/destructuring-assignment": 0,
+    "func-style": ["error", "expression", { "allowArrowFunctions": true }],
+    "camelcase": "off",
+    "default-param-last": "warn",
+    // https://stackoverflow.com/a/70051760 this rule react/function-component-definition is critical
+    // otherwise airbnb update will make functions look scary, but it's not, it just looks weird if
+    // you have a function component looking like function MyComponent() { return <div>...</div>}
+    // instead of an arrow function looking like const MyComponent = () => <div>...</div>
+    // you can agree the second looks cleaner, so we need this rule below to be in place.
+    // Read stackoverflow answer attached above for more info.
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ]
+  }
 }
